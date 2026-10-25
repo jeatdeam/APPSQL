@@ -75,7 +75,7 @@ export class SqlEngine {
       const start = performance.now()
       const results = db.exec(translated)
       const elapsedMs = performance.now() - start
-      const last = results.at(-1)
+      const last = results[results.length - 1]
       return { ok: true, result: last ? { columns: last.columns, rows: last.values } : null, elapsedMs }
     } catch (e) {
       return { ok: false, error: friendlyError(String((e as Error).message ?? e)) }

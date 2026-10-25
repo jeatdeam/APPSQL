@@ -1,35 +1,24 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useEffect, useState } from 'react'
+import { findTheme } from './themes'
+import { readStorage, writeStorage } from './hooks/useProgress'
+import { Workspace } from './components/Workspace'
 
-function App() {
-  const [count, setCount] = useState(0)
+const THEME_KEY = 'appsql:theme'
 
-  return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+export default function App() {
+  const [theme, setTheme] = useState(() => findTheme(readStorage<string | null>(THEME_KEY, null)))
+
+  // En <html> para que el fondo de toda la página también tome el tema.
+  useEffect(() => {
+    document.documentElement.dataset.theme = theme.id
+  }, [theme.id])
+
+  function changeTheme(id: string) {
+    const next = findTheme(id)
+    writeStorage(THEME_KEY, next.id)
+    setTheme(next)
+  }
+
+  // key: al cambiar de tema se remonta todo (progreso, base y ejercicio activo).
+  return <Workspace key={theme.id} theme={theme} onThemeChange={changeTheme} />
 }
-
-export default App
