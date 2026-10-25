@@ -1,12 +1,12 @@
-/* Tema Dracula Pixel: paleta Dracula + estética 8 bits. */
+/* Tema Dracula: paleta Dracula con tipografía normal. */
 
 :root[data-theme='dracula'] {
   --bg: #282a36;
   --panel: #21222c;
   --panel-2: #191a21;
   --border: #44475a;
-  --border-width: 4px;
-  --radius: 0;
+  --border-width: 1px;
+  --radius: 6px;
   --text: #f8f8f2;
   --muted: #6272a4;
   --accent: #bd93f9;
@@ -14,13 +14,13 @@
   --error: #ff5555;
   --warning: #f1fa8c;
 
-  --font-title: 'Press Start 2P', monospace;
-  --font-body: 'VT323', monospace;
-  --font-code: 'VT323', monospace;
-  --title-size: 13px;
-  --body-size: 22px;
-  --small-size: 10px;
-  --editor-size: 22px;
+  --font-title: system-ui, 'Segoe UI', Roboto, sans-serif;
+  --font-body: system-ui, 'Segoe UI', Roboto, sans-serif;
+  --font-code: 'JetBrains Mono', ui-monospace, Consolas, monospace;
+  --title-size: 18px;
+  --body-size: 15px;
+  --small-size: 13px;
+  --editor-size: 14px;
 
   --editor-bg: #282a36;
   --editor-text: #f8f8f2;
@@ -40,43 +40,20 @@
   --table-head-text: #8be9fd;
   --btn-bg: #44475a;
   --btn-text: #f8f8f2;
-  /* Borde inferior más oscuro: efecto botón 8 bits */
-  --btn-shadow: inset 0 -4px 0 rgba(0, 0, 0, 0.45);
   --btn-run-bg: #bd93f9;
   --btn-check-bg: #50fa7b;
   --btn-on-color: #282a36;
 }
 
 [data-theme='dracula'] .btn {
-  border: none;
-  padding: 12px 14px 14px;
-  line-height: 1;
+  font-weight: 600;
 }
 
-[data-theme='dracula'] .app-title {
-  text-shadow: 3px 3px 0 #44475a;
+[data-theme='dracula'] .app-title,
+[data-theme='dracula'] .exercise-title {
+  font-weight: 700;
 }
 
 [data-theme='dracula'] .exercise-link.boss {
   color: #ff5555;
-}
-
-[data-theme='dracula'] .exercise-tag {
-  letter-spacing: 1px;
-}
-
-[data-theme='dracula'] .message,
-[data-theme='dracula'] .hints {
-  font-size: 22px;
-}
-
-[data-theme='dracula'] .results th {
-  font-weight: normal;
-}
-
-/* Píxeles nítidos en las fuentes bitmap */
-[data-theme='dracula'] body,
-[data-theme='dracula'] .cm-editor {
-  -webkit-font-smoothing: none;
-  font-smooth: never;
 }

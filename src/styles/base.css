@@ -281,9 +281,16 @@ select {
   overflow: hidden;
 }
 
+/* El editor crece con la consulta. En celulares y tablets puede ocupar casi toda
+   la pantalla; desde 1024px se limita a la mitad. */
 .editor .cm-editor {
   min-height: 140px;
-  max-height: 320px;
+  max-height: 85vh;
+}
+@media (min-width: 1024px) {
+  .editor .cm-editor {
+    max-height: 50vh;
+  }
 }
 .editor .cm-editor.cm-focused {
   outline: none;

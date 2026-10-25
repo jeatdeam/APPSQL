@@ -4,7 +4,7 @@ import './dracula.css'
 
 export const draculaPixel: Theme = {
   id: 'dracula',
-  name: 'Dracula Pixel',
+  name: 'Dracula',
   appTitle: 'SQL QUEST',
   database: { id: 'northwind', name: 'Northwind', url: 'db/northwind.sql' },
   levels,
