@@ -28,6 +28,8 @@ export function Workspace({ theme, onThemeChange }: Props) {
   const { engine, schema, error: loadError } = useEngine(theme.database)
   const [activeId, setActiveId] = useState(() => (theme.exercises.find((e) => !progress[e.id]?.solved) ?? theme.exercises[0]).id)
   const [output, setOutput] = useState<Output>({})
+  // Menú de niveles desplegable (solo se usa cuando la app es angosta).
+  const [menuOpen, setMenuOpen] = useState(false)
 
   const index = theme.exercises.findIndex((e) => e.id === activeId)
   const exercise = theme.exercises[index]
@@ -39,6 +41,7 @@ export function Workspace({ theme, onThemeChange }: Props) {
   function select(id: string) {
     setActiveId(id)
     setOutput({})
+    setMenuOpen(false)
   }
 
   function run() {
@@ -80,7 +83,15 @@ export function Workspace({ theme, onThemeChange }: Props) {
       <TopBar theme={theme} onThemeChange={onThemeChange} xp={totalXp(progress)} lives={livesLeft(p)} solved={solvedCount} />
 
       <div className="main">
-        <Sidebar theme={theme} progress={progress} activeId={activeId} onSelect={select} />
+        <button className="levels-toggle" onClick={() => setMenuOpen((o) => !o)} aria-expanded={menuOpen} aria-controls="levels-menu">
+          <span aria-hidden>{menuOpen ? '✕' : '☰'}</span>
+          <span>Niveles</span>
+          <span className="levels-toggle-current">
+            {solvedCount}/{theme.exercises.length} · {exercise.title}
+          </span>
+          <span aria-hidden>{menuOpen ? '▲' : '▼'}</span>
+        </button>
+        <Sidebar theme={theme} progress={progress} activeId={activeId} onSelect={select} open={menuOpen} />
 
         <main className="exercise">
           <div className="exercise-head">

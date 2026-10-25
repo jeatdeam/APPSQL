@@ -7,11 +7,12 @@ interface Props {
   progress: ThemeProgress
   activeId: string
   onSelect: (id: string) => void
+  open: boolean
 }
 
-export function Sidebar({ theme, progress, activeId, onSelect }: Props) {
+export function Sidebar({ theme, progress, activeId, onSelect, open }: Props) {
   return (
-    <nav className="sidebar" aria-label="Niveles y ejercicios">
+    <nav id="levels-menu" className={`sidebar${open ? ' open' : ''}`} aria-label="Niveles y ejercicios">
       {theme.levels.map((level) => {
         const items = theme.exercises.map((ex, index) => ({ ex, index })).filter(({ ex }) => ex.levelId === level.id)
         return (
